@@ -2,7 +2,7 @@
 
 # UniSelectBD
 
-Welcome to UniSelectBD! This project is dedicated to providing a comprehensive portal for higher education in Bangladesh. Students can explore universities, programs, and plan their study with ease.
+Welcome to UniSelectBD! This project is dedicated to providing a comprehensive portal for higher education in Bangladesh. Students can explore universities, and programs, and plan their studies with ease.
 
 ## Features
 
