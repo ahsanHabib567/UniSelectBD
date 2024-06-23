@@ -12,6 +12,16 @@ import UniversityManagmentLayout from "@/layouts/UniversityManagmentAdmin";
 import UniversityInfoTab from "@/pages/dashboard/university/manages/UniversityInfoTab";
 import CoursesManagment from "@/pages/dashboard/university/courses/CoursesManagment";
 import ManageNoticeAndInfoes from "@/pages/dashboard/university/notice-and-infos/ManageNoticeAndInfoes";
+import UniversityInformation from "@/pages/UniversityInformation";
+import AdminLayout from "@/layouts/AdminLayout";
+import ManageUsers from "@/pages/dashboard/admin/ManageUsers";
+import ManageUniversity from "@/pages/dashboard/admin/ManageUniversity";
+import ManageWebsite from "@/pages/dashboard/admin/ManageWebsite";
+import ManageFeedBack from "@/pages/dashboard/admin/ManageFeedBack";
+import ManageAdminsAndRole from "@/pages/dashboard/admin/ManageAdminsAndRole";
+import UniversitySignupRequest from "@/pages/UniversitySignupRequest";
+import RegistrationSelect from "@/pages/RegistrationSelect";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -28,18 +38,34 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/registration",
+        path: "/registration/user",
         element: <Registration />,
       },
       {
         path: "/universities",
         element: <Universities />,
       },
+      {
+        path: "/university/information",
+        element: <UniversityInformation />,
+      },
+      {
+        path: "/university/registration/request",
+        element: <UniversitySignupRequest />,
+      },
+      {
+        path: "/registration",
+        element: <RegistrationSelect />,
+      },
     ],
   },
   {
     path: "/dashboard/users",
-    element: <UserDashbordLayout />,
+    element: (
+      <PrivateRoute allowedRoles={["user"]}>
+        <UserDashbordLayout />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -54,7 +80,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard/admin/university",
-    element: <UniversityManagmentLayout />,
+    element: (
+      <PrivateRoute allowedRoles={["university-admin"]}>
+        <UniversityManagmentLayout />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -68,6 +98,37 @@ export const router = createBrowserRouter([
       {
         path: "manage/notices-and-infos",
         element: <ManageNoticeAndInfoes />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard/admin",
+    element: (
+      <PrivateRoute allowedRoles={["admin"]}>
+        <AdminLayout />
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "manage/users",
+        element: <ManageUsers />,
+      },
+      {
+        path: "manage/university",
+        element: <ManageUniversity />,
+      },
+      {
+        path: "manage/website",
+        element: <ManageWebsite />,
+      },
+      {
+        path: "manage/feedback",
+        element: <ManageFeedBack />,
+      },
+      {
+        path: "manage/admins/and/role",
+        element: <ManageAdminsAndRole />,
       },
     ],
   },
